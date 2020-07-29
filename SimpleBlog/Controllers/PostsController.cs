@@ -27,6 +27,7 @@ namespace SimpleBlog.Controllers
         
         public async Task<IActionResult> Index()
         {
+            Console.WriteLine(_context);
             if (User.Identity.IsAuthenticated)
                 return View(await _context.Post.ToListAsync());
             else
@@ -64,11 +65,12 @@ namespace SimpleBlog.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Create([Bind("ID,Title,Text")] Post post)
         {
-            //post.Creator = await _userManager.GetUserAsync(User).Email;
+            var currentUser = await _userManager.GetUserAsync(User);
+            post.Creator = currentUser;
             post.CreatedTime = DateTime.Now;
-            Console.WriteLine(post);
             if (ModelState.IsValid)
             {
                 
@@ -101,6 +103,7 @@ namespace SimpleBlog.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, [Bind("ID,Title,Text")] Post post)
         {
             post.CreatedTime = DateTime.Now;
@@ -156,11 +159,14 @@ namespace SimpleBlog.Controllers
         // POST: Posts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var post = await _context.Post.FindAsync(id);
             _context.Post.Remove(post);
             await _context.SaveChangesAsync();
+            //var creator = await _context.Users.FindAsync(post.Creator.Id);
+            //creator.Posts.Remove(post);
             return RedirectToAction(nameof(Index));
         }
 
