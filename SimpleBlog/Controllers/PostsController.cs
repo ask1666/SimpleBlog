@@ -28,10 +28,11 @@ namespace SimpleBlog.Controllers
         public async Task<IActionResult> Index()
         {
             Console.WriteLine(_context);
+            List<Post> posts = await _context.Post.Include(Post => Post.Creator).ToListAsync();
             if (User.Identity.IsAuthenticated)
-                return View(await _context.Post.ToListAsync());
+                return View(posts);
             else
-                return View("~/Views/Posts/IndexUnAuthorized.cshtml", await _context.Post.ToListAsync());
+                return View("~/Views/Posts/IndexUnAuthorized.cshtml", posts);
         }
 
 
@@ -68,13 +69,12 @@ namespace SimpleBlog.Controllers
         [Authorize]
         public async Task<IActionResult> Create([Bind("ID,Title,Text")] Post post)
         {
-            var currentUser = await _userManager.GetUserAsync(User);
+            User currentUser = await _userManager.GetUserAsync(User);
             post.Creator = currentUser;
             post.CreatedTime = DateTime.Now;
             if (ModelState.IsValid)
             {
-                
-                _context.Add(post);
+                await _context.AddAsync(post);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
