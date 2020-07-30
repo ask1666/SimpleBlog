@@ -10,20 +10,20 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 </head>
 <div>
-    <div class="border-bottom border-dark">
-        <h1 class="text-center">@Html.DisplayFor(model => model.Post.Title)</h1>
-        <h4 class="text-black-50 font-weight-normal text-center">
+    <div class="border-bottom border-white bg-dark p-3">
+        <h1 class="text-white text-center">@Html.DisplayFor(model => model.Post.Title)</h1>
+        <h4 class="text-white-50 font-weight-normal text-center">
             @Html.DisplayFor(model => model.Post.Creator.Email)
         </h4>
-        <h4 class="pb-5 text-black-50 font-weight-normal text-center">
+        <h4 class="pb-5 text-white-50 font-weight-normal text-center">
             @Html.DisplayFor(model => model.Post.CreatedTime)
         </h4>
-        <h5 class=" text-center font-weight-normal pb-5" style="white-space: pre-line">
+        <h5 class="text-white text-center font-weight-normal pb-5" style="white-space: pre-line">
             @Html.DisplayFor(model => model.Post.Text)
         </h5>
     </div>
 
-    <div class="container py-5">
+    <div class="container pt-5">
         <div class="row justify-content-center w-100">
             <div class="col-md-4 ">
                 <form asp-action="CreateComment" asp-controller="Posts">
@@ -45,31 +45,31 @@
         </div>
     </div>
 
-    <div class="py-5 d-flex flex-column align-items-center">
+    <div class="pt-5 d-flex flex-column align-items-center">
         @foreach (var item in Model.Post.Comments)
         {
             @if ((SignInManager.IsSignedIn(User))) {
                 if (item.Creator.Email.ToString() == User.Identity.Name.ToString() || Model.Post.Creator.Email.ToString() == User.Identity.Name.ToString())
             {
-                <div class="w-50 py-3 border border-dark">
-                    <div class="unde">
-                        <h5 class="px-2 d-inline-block text-center"><u>@item.Creator.Email</u></h5>
-                        <p class="text-black-50 d-inline-block">@item.CreatedTime.ToShortDateString()  |  @item.CreatedTime.ToShortTimeString()</p>
-                    </div>
-                    <div class="border-light border bg-dark rounded">
+                <div class="w-50 py-3 border border-white bg-dark">
+                    
+                    <h5 class="text-white px-2 d-inline text-center"><u>@item.Creator.Email</u></h5>
+                    <p class="text-white-50 d-inline">@item.CreatedTime.ToShortDateString()  |  @item.CreatedTime.ToShortTimeString()</p>
+                    
+                    <div class="pt-3 bg-dark rounded">
                         <a type="submit" class="p-3 float-right text-danger" asp-controller="Comments" asp-action="Delete" asp-route-id="@item.ID">
                             <i class="far fa-trash-alt fa-2x text-center"></i>
                         </a>
                     </div>
-                <h6 class="px-3 text-left">@item.Text </h6>
+                <h6 class="text-white px-3 text-left">@item.Text </h6>
         </div>
                 }
             } else
             {
-                <div class="py-3 w-50 border border-dark">
-                    <h5 class="px-2 d-inline-block text-center">@item.Creator.Email</h5>
-                    <p class="text-black-50 d-inline-block">@item.CreatedTime.ToShortDateString()  |  @item.CreatedTime.ToShortTimeString()</p>
-                    <h6 class="px-3 text-left">@item.Text </h6>
+                <div class="py-3 w-50 border border-white bg-dark">
+                    <h5 class="text-white px-2 d-inline-block text-center">@item.Creator.Email</h5>
+                    <p class="text-white-50 d-inline-block">@item.CreatedTime.ToShortDateString()  |  @item.CreatedTime.ToShortTimeString()</p>
+                    <h6 class="text-white px-3 text-left">@item.Text </h6>
 
                 </div>
             }

@@ -24,6 +24,14 @@ namespace SimpleBlog.Controllers
             _userManager = userManager;
         }
 
+        public async Task<IActionResult> Home()
+        {
+
+            var posts = from p in _context.Post.Include(Post => Post.Creator) select p;
+
+            return View(await posts.ToListAsync());
+        }
+
         // GET: Posts
         public async Task<IActionResult> Index(string searchString)
         {

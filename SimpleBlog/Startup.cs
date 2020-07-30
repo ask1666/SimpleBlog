@@ -97,7 +97,7 @@ namespace SimpleBlog
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Posts}/{action=Index}/{id?}");
+                    pattern: "{controller=Posts}/{action=Home}/{id?}");
                 endpoints.MapRazorPages();
             });
         }

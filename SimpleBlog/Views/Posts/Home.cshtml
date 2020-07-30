@@ -1,0 +1,36 @@
+﻿@model IEnumerable<SimpleBlog.Models.Post>
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+<h1 class="text-center pb-2 border-bottom ">Home</h1>
+
+<div class="d-flex flex-column pt-3">
+    @foreach (var item in Model)
+    {
+        string getLimitedText(string text, int length)
+        {
+            if (text.Length > length)
+            {
+                string returnText = text.Substring(0, length);
+                return (returnText += ("..."));
+            }
+            return text;
+        }
+
+        <div class="d-flex justify-content-center bg-dark border border-white pt-2">
+            <div class="w-50 text-center     ">
+                <a asp-controller="posts" asp-action="Details" asp-route-id="@item.ID" class=" text-white display-4 font-weight-normal">
+                    @item.Title
+                </a>
+                <p class="text-white-50">@item.Creator.Email     @item.CreatedTime.ToShortDateString() | @item.CreatedTime.ToShortTimeString()</p>
+                <h5 class=" text-white text-center font-weight-normal pb-5" style="white-space: pre-line">@getLimitedText(item.Text, 250) </h5>
+            </div>
+        </div>
+
+    }
+</div>
+<div class=" d-flex align-items-center justify-content-center w-100 py-5">
+    <a class="btn btn-primary" asp-action="Create">Create New Post</a>
+</div>
