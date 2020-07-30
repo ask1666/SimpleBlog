@@ -173,8 +173,6 @@ C:\Users\geeky\Documents\StudioProjects\SimpleBlog\SimpleBlog\obj\Debug\netcorea
 C:\Users\geeky\Documents\StudioProjects\SimpleBlog\SimpleBlog\obj\Debug\netcoreapp3.1\Razor\Views\Comments\Details.cshtml.g.cs
 C:\Users\geeky\Documents\StudioProjects\SimpleBlog\SimpleBlog\obj\Debug\netcoreapp3.1\Razor\Views\Comments\Edit.cshtml.g.cs
 C:\Users\geeky\Documents\StudioProjects\SimpleBlog\SimpleBlog\obj\Debug\netcoreapp3.1\Razor\Views\Comments\Index.cshtml.g.cs
-C:\Users\geeky\Documents\StudioProjects\SimpleBlog\SimpleBlog\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
-C:\Users\geeky\Documents\StudioProjects\SimpleBlog\SimpleBlog\obj\Debug\netcoreapp3.1\Razor\Views\Home\Privacy.cshtml.g.cs
 C:\Users\geeky\Documents\StudioProjects\SimpleBlog\SimpleBlog\obj\Debug\netcoreapp3.1\Razor\Views\Posts\Create.cshtml.g.cs
 C:\Users\geeky\Documents\StudioProjects\SimpleBlog\SimpleBlog\obj\Debug\netcoreapp3.1\Razor\Views\Posts\Delete.cshtml.g.cs
 C:\Users\geeky\Documents\StudioProjects\SimpleBlog\SimpleBlog\obj\Debug\netcoreapp3.1\Razor\Views\Posts\Details.cshtml.g.cs

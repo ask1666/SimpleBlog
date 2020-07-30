@@ -25,18 +25,23 @@ namespace SimpleBlog.Controllers
         }
 
         // GET: Posts
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-            Console.WriteLine(_context);
-            List<Post> posts = await _context.Post.Include(Post => Post.Creator).ToListAsync();
-                return View(posts);
+            
+            var posts = from p in _context.Post.Include(Post => Post.Creator) select p;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                posts = posts.Where(p => p.Title.Contains(searchString));
+            }
+            return View(await posts.ToListAsync());
         }
 
         //GET: MyPosts
         public async Task<IActionResult> MyIndex()
         {
             User currentUser = await _userManager.GetUserAsync(User);
-            List<Post> posts = await _context.Post.Include(Post => Post.Creator).ToListAsync();
+            List<Post> posts = await _context.Post.Include(Post => Post.Creator).Include(Post => Post.Comments).ToListAsync();
             List<Post> myPosts = new List<Post>();
 
             foreach (var post in from post in posts where post.Creator == currentUser select post)
