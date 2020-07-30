@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -13,10 +15,12 @@ namespace SimpleBlog.Controllers
     public class CommentsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<User> _userManager;
 
-        public CommentsController(ApplicationDbContext context)
+        public CommentsController(ApplicationDbContext context,UserManager<User> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Comments
@@ -117,6 +121,7 @@ namespace SimpleBlog.Controllers
         }
 
         // GET: Comments/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -125,10 +130,15 @@ namespace SimpleBlog.Controllers
             }
 
             var comment = await _context.Comment
+                .Include(Comment => Comment.Creator)
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (comment == null)
             {
                 return NotFound();
+            }
+            if (!(comment.Creator.Email.ToString() == User.Identity.Name.ToString()))
+            {
+                return View("Unauthorized");
             }
 
             return View(comment);
@@ -137,12 +147,14 @@ namespace SimpleBlog.Controllers
         // POST: Comments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            
             var comment = await _context.Comment.FindAsync(id);
             _context.Comment.Remove(comment);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return Redirect("https://localhost:44345");
         }
 
         private bool CommentExists(int id)

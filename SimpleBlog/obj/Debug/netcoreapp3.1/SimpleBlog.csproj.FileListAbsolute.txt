@@ -168,11 +168,7 @@ C:\Users\geeky\Documents\StudioProjects\SimpleBlog\SimpleBlog\obj\Debug\netcorea
 C:\Users\geeky\Documents\StudioProjects\SimpleBlog\SimpleBlog\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\_ValidationScriptsPartial.cshtml.g.cs
 C:\Users\geeky\Documents\StudioProjects\SimpleBlog\SimpleBlog\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\_ViewImports.cshtml.g.cs
 C:\Users\geeky\Documents\StudioProjects\SimpleBlog\SimpleBlog\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\_ViewStart.cshtml.g.cs
-C:\Users\geeky\Documents\StudioProjects\SimpleBlog\SimpleBlog\obj\Debug\netcoreapp3.1\Razor\Views\Comments\Create.cshtml.g.cs
 C:\Users\geeky\Documents\StudioProjects\SimpleBlog\SimpleBlog\obj\Debug\netcoreapp3.1\Razor\Views\Comments\Delete.cshtml.g.cs
-C:\Users\geeky\Documents\StudioProjects\SimpleBlog\SimpleBlog\obj\Debug\netcoreapp3.1\Razor\Views\Comments\Details.cshtml.g.cs
-C:\Users\geeky\Documents\StudioProjects\SimpleBlog\SimpleBlog\obj\Debug\netcoreapp3.1\Razor\Views\Comments\Edit.cshtml.g.cs
-C:\Users\geeky\Documents\StudioProjects\SimpleBlog\SimpleBlog\obj\Debug\netcoreapp3.1\Razor\Views\Comments\Index.cshtml.g.cs
 C:\Users\geeky\Documents\StudioProjects\SimpleBlog\SimpleBlog\obj\Debug\netcoreapp3.1\Razor\Views\Posts\Create.cshtml.g.cs
 C:\Users\geeky\Documents\StudioProjects\SimpleBlog\SimpleBlog\obj\Debug\netcoreapp3.1\Razor\Views\Posts\Delete.cshtml.g.cs
 C:\Users\geeky\Documents\StudioProjects\SimpleBlog\SimpleBlog\obj\Debug\netcoreapp3.1\Razor\Views\Posts\Details.cshtml.g.cs
@@ -196,3 +192,4 @@ C:\Users\geeky\Documents\StudioProjects\SimpleBlog\SimpleBlog\obj\Debug\netcorea
 C:\Users\geeky\Documents\StudioProjects\SimpleBlog\SimpleBlog\obj\Debug\netcoreapp3.1\SimpleBlog.genruntimeconfig.cache
 C:\Users\geeky\Documents\StudioProjects\SimpleBlog\SimpleBlog\obj\Debug\netcoreapp3.1\SimpleBlog.csprojAssemblyReference.cache
 C:\Users\geeky\Documents\StudioProjects\SimpleBlog\SimpleBlog\obj\Debug\netcoreapp3.1\Razor\Views\Posts\Home.cshtml.g.cs
+C:\Users\geeky\Documents\StudioProjects\SimpleBlog\SimpleBlog\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Unauthorized.cshtml.g.cs

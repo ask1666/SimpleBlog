@@ -124,7 +124,7 @@ namespace SimpleBlog.Controllers
             {
                 await _context.AddAsync(comment);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Details",new { post.ID });
             }
             return View();
         }
