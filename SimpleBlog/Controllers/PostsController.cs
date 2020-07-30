@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SimpleBlog.Data;
 using SimpleBlog.Models;
+using SimpleBlog.ViewModels;
 
 namespace SimpleBlog.Controllers
 {
@@ -54,16 +55,17 @@ namespace SimpleBlog.Controllers
             {
                 return NotFound();
             }
-
-            var post = await _context.Post
+            var model = new PostCommentViewModel();
+            model.Post = await _context.Post
                 .Include(Post => Post.Comments)
                 .FirstOrDefaultAsync(m => m.ID == id);
-            if (post == null)
+
+            if (model.Post == null)
             {
                 return NotFound();
             }
 
-            return View(post);
+            return View(model);
         }
 
         // GET: Posts/Create
@@ -93,22 +95,23 @@ namespace SimpleBlog.Controllers
             return View(post);
         }
 
-        // Currently not working
+        
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> CreateComment([Bind("ID,Text")] Comment comment, Post post)
+        public async Task<IActionResult> CreateComment([Bind("ID,Text,Post")] Comment comment, [Bind("ID")] Post post)
         {
-            /*User currentUser = await _userManager.GetUserAsync(User);
-            Post currentPost = post;
+
+            User currentUser = await _userManager.GetUserAsync(User);
+            Post currentPost = await _context.Post.FirstOrDefaultAsync(m => m.ID == post.ID);
+            comment.Post = currentPost;
             comment.Creator = currentUser;
             comment.CreatedTime = DateTime.Now;
-            comment.Post = currentPost;
             if (ModelState.IsValid)
             {
                 await _context.AddAsync(comment);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }*/
+            }
             return View();
         }
 

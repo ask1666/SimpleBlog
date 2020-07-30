@@ -1,16 +1,16 @@
-﻿@model SimpleBlog.Models.Post
+﻿@model SimpleBlog.ViewModels.PostCommentViewModel;
 
 @{
     ViewData["Title"] = "Details";
 }
     <div>
-        <h1 class="text-center">@Html.DisplayFor(model => model.Title)</h1>
+        <h1 class="text-center">@Html.DisplayFor(model => model.Post.Title)</h1>
         <h4 class="pb-5 text-black-50 font-weight-normal text-center">
-            @Html.DisplayFor(model => model.CreatedTime)
+            @Html.DisplayFor(model => model.Post.CreatedTime)
         </h4>
 
         <h5 class=" font-weight-normal " style="white-space: pre-line">
-            @Html.DisplayFor(model => model.Text)
+            @Html.DisplayFor(model => model.Post.Text)
         </h5>
 
         <h3>Leave a comment:</h3>
@@ -19,9 +19,14 @@
                 <form asp-action="CreateComment" asp-controller="Posts">
                     <div class="text-danger"></div>
                     <div class="form-group">
-                        <label asp-for="Text" class="control-label"></label>
-                        <textarea asp-for="Text" class="form-control"></textarea>
-                        <span asp-validation-for="Text" class="text-danger"></span>
+                        <label asp-for="Post.ID" class="control-label"></label>
+                        <input asp-for="Post.ID" class="form-control" >
+                        <span asp-validation-for="Post.ID" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Comment.Text" class="control-label"></label>
+                        <input asp-for="Comment.Text" class="form-control" >
+                        <span asp-validation-for="Comment.Text" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <input type="submit" value="Create a comment" class="btn btn-primary" />
@@ -30,7 +35,7 @@
             </div>
         </div>
 
-        @foreach (var item in Model.Comments)
+        @foreach (var item in Model.Post.Comments)
         {
             <div class="d-flex">
                 <h5>@item.Text </h5>

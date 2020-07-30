@@ -13,7 +13,7 @@
 <div class="d-flex flex-column">
     @foreach (var item in Model)
     {
-        <a asp-action="Details" asp-route-id="@item.ID" class="text-decoration-none text-white p-2 btn btn-dark border-light border">
+        <a asp-controller="posts" asp-action="Details" asp-route-id="@item.ID" class="text-decoration-none text-white p-2 btn btn-dark border-light border">
             <div class="d-flex">
                 <h5 class="px-3 w-50">@item.Title</h5>
                 <h5 class="px-3 w-50">@item.Creator.Email</h5>

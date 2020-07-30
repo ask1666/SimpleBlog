@@ -1,0 +1,47 @@
+@model SimpleBlog.ViewModels.PostCommentViewModel;
+
+@{
+    ViewData["Title"] = "Details";
+}
+<div>
+    <h1 class="text-center">@Html.DisplayFor(model => model.Post.Title)</h1>
+    <h4 class="pb-5 text-black-50 font-weight-normal text-center">
+        @Html.DisplayFor(model => model.Post.CreatedTime)
+    </h4>
+
+    <h5 class=" font-weight-normal " style="white-space: pre-line">
+        @Html.DisplayFor(model => model.Post.Text)
+    </h5>
+
+    <h3>Leave a comment:</h3>
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="CreateComment" asp-controller="Posts">
+                <div class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Comment.Creator" class="control-label"></label>
+                    <input asp-for="Comment.Creator" class="form-control"/>
+                    <span asp-validation-for="Comment.Creator" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Comment.Text" class="control-label"></label>
+                    <textarea asp-for="Comment.Text" class="form-control"></textarea>
+                    <span asp-validation-for="Comment.Text" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create a comment" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    @foreach (var item in Model.Post.Comments)
+        {
+    <div class="d-flex">
+        <h5>@item.Text </h5>
+        <h5>@item.Creator </h5>
+        <h5>@item.CreatedTime </h5>
+    </div>
+        }
+
+</div>
