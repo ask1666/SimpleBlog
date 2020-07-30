@@ -1,31 +1,39 @@
-﻿@model SimpleBlog.ViewModels.PostCommentViewModel;
+﻿@using Microsoft.AspNetCore.Identity
+@model SimpleBlog.ViewModels.PostCommentViewModel
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
 
 @{
     ViewData["Title"] = "Details";
 }
-    <div>
-        <h1 class="text-center">@Html.DisplayFor(model => model.Post.Title)</h1>
-        <h4 class="pb-5 text-black-50 font-weight-normal text-center">
-            @Html.DisplayFor(model => model.Post.CreatedTime)
-        </h4>
+<head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+</head>
+<div>
+    <h1 class="text-center">@Html.DisplayFor(model => model.Post.Title)</h1>
+    <h4 class="text-black-50 font-weight-normal text-center">
+        @Html.DisplayFor(model => model.Post.Creator.Email)
+    </h4>
+    <h4 class="pb-5 text-black-50 font-weight-normal text-center">
+        @Html.DisplayFor(model => model.Post.CreatedTime)
+    </h4>
+    <h5 class=" text-center font-weight-normal " style="white-space: pre-line">
+        @Html.DisplayFor(model => model.Post.Text)
+    </h5>
 
-        <h5 class=" font-weight-normal " style="white-space: pre-line">
-            @Html.DisplayFor(model => model.Post.Text)
-        </h5>
-
-        <h3>Leave a comment:</h3>
-        <div class="row">
+    <div class="container py-5">
+        <div class="row justify-content-center w-100">
             <div class="col-md-4">
                 <form asp-action="CreateComment" asp-controller="Posts">
                     <div class="text-danger"></div>
                     <div class="form-group">
-                        <label asp-for="Post.ID" class="control-label"></label>
-                        <input asp-for="Post.ID" class="form-control" >
-                        <span asp-validation-for="Post.ID" class="text-danger"></span>
+                        <label asp-for="Post.ID" class="control-label d-none"></label>
+                        <input asp-for="Post.ID" class="form-control d-none">
+                        <span asp-validation-for="Post.ID" class="text-danger d-none"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Comment.Text" class="control-label"></label>
-                        <input asp-for="Comment.Text" class="form-control" >
+                        <label asp-for="Comment.Text" class="control-label">Leave a comment:</label>
+                        <input asp-for="Comment.Text" class="form-control">
                         <span asp-validation-for="Comment.Text" class="text-danger"></span>
                     </div>
                     <div class="form-group">
@@ -34,14 +42,34 @@
                 </form>
             </div>
         </div>
+    </div>
 
+    <div class="py-5 d-flex flex-column align-items-center">
         @foreach (var item in Model.Post.Comments)
         {
-            <div class="d-flex">
-                <h5>@item.Text </h5>
-                <h5>@item.Creator </h5>
-                <h5>@item.CreatedTime </h5>
-            </div>
-        }
+            @if ((SignInManager.IsSignedIn(User) && item.Creator.Email.ToString() == User.Identity.Name.ToString()) || Model.Post.Creator.Email.ToString() == User.Identity.Name.ToString())
+            {
+                <div class="w-50 py-3 border border-dark">
+                    <div class="unde">
+                        <h5 class="px-2 d-inline-block text-center"><u>@item.Creator.Email</u></h5>
+                        <p class="text-black-50 d-inline-block">@item.CreatedTime.ToShortDateString()  |  @item.CreatedTime.ToShortTimeString()</p>
+                    </div>
+                    <a class="p-3 float-right" asp-controller="comments" asp-action="Delete" asp-route-id="@item.ID">
+                        <i class="far fa-trash-alt fa-2x text-center"></i>
+                    </a>
+                    <h6 class="px-3 text-left">@item.Text </h6>
+                </div>
+            }
+            else
+            {
+                <div class="py-3 w-50 border border-dark">
+                    <h5 class="px-2 d-inline-block text-center">@item.Creator.Email</h5>
+                    <p class="text-black-50 d-inline-block">@item.CreatedTime.ToShortDateString()  |  @item.CreatedTime.ToShortTimeString()</p>
+                    <h6 class="px-3 text-left">@item.Text </h6>
 
+                </div>
+            }
+        }
     </div>
+
+</div>

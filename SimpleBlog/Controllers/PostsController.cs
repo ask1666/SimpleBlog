@@ -57,7 +57,8 @@ namespace SimpleBlog.Controllers
             }
             var model = new PostCommentViewModel();
             model.Post = await _context.Post
-                .Include(Post => Post.Comments)
+                .Include(Post => Post.Comments).ThenInclude(Comment => Comment.Creator)
+                .Include(Post => Post.Creator)
                 .FirstOrDefaultAsync(m => m.ID == id);
 
             if (model.Post == null)

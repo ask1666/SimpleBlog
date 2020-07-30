@@ -197,4 +197,3 @@ C:\Users\geeky\Documents\StudioProjects\SimpleBlog\SimpleBlog\obj\Debug\netcorea
 C:\Users\geeky\Documents\StudioProjects\SimpleBlog\SimpleBlog\obj\Debug\netcoreapp3.1\SimpleBlog.pdb
 C:\Users\geeky\Documents\StudioProjects\SimpleBlog\SimpleBlog\obj\Debug\netcoreapp3.1\SimpleBlog.genruntimeconfig.cache
 C:\Users\geeky\Documents\StudioProjects\SimpleBlog\SimpleBlog\obj\Debug\netcoreapp3.1\SimpleBlog.csprojAssemblyReference.cache
-C:\Users\geeky\Documents\StudioProjects\SimpleBlog\SimpleBlog\obj\Debug\netcoreapp3.1\Razor\Views\PostComment\Details.cshtml.g.cs
