@@ -4,48 +4,25 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1 class="text-center pb-5">Posts</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Text)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedTime)
-            </th><th>
-                @Html.DisplayNameFor(model => model.Creator)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Text)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedTime)
-            </td><td>
-                @Html.DisplayFor(modelItem =>   item.Creator.Email)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="d-flex">
+    <h4 class="text-center w-50">Title:</h4>
+    <h4 class="text-center w-50">Creator:</h4>
+</div>
+<div class="d-flex flex-column">
+    @foreach (var item in Model)
+    {
+        <a asp-action="Details" asp-route-id="@item.ID" class="text-decoration-none text-white p-2 btn btn-dark border-light border">
+            <div class="d-flex">
+                <h5 class="px-3 w-50">@item.Title</h5>
+                <h5 class="px-3 w-50">@item.Creator.Email</h5>
+            </div>
+        </a>
+
+
+    }
+</div>
+<div class=" d-flex align-items-center justify-content-center w-100 py-5">
+    <a class="btn btn-success" asp-action="Create">Create New Post</a>
+</div>

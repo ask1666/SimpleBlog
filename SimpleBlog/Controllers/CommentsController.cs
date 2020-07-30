@@ -22,7 +22,7 @@ namespace SimpleBlog.Controllers
         // GET: Comments
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Comment.ToListAsync());
+            return View(await _context.Comment.Include(Comment => Comment.Creator).ToListAsync());
         }
 
         // GET: Comments/Details/5

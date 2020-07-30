@@ -24,15 +24,26 @@ namespace SimpleBlog.Controllers
         }
 
         // GET: Posts
-        
         public async Task<IActionResult> Index()
         {
             Console.WriteLine(_context);
             List<Post> posts = await _context.Post.Include(Post => Post.Creator).ToListAsync();
-            if (User.Identity.IsAuthenticated)
                 return View(posts);
-            else
-                return View("~/Views/Posts/IndexUnAuthorized.cshtml", posts);
+        }
+
+        //GET: MyPosts
+        public async Task<IActionResult> MyIndex()
+        {
+            User currentUser = await _userManager.GetUserAsync(User);
+            List<Post> posts = await _context.Post.Include(Post => Post.Creator).ToListAsync();
+            List<Post> myPosts = new List<Post>();
+
+            foreach (var post in from post in posts where post.Creator == currentUser select post)
+            {
+                myPosts.Add(post);
+            }
+
+            return View(myPosts);
         }
 
 
@@ -45,6 +56,7 @@ namespace SimpleBlog.Controllers
             }
 
             var post = await _context.Post
+                .Include(Post => Post.Comments)
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (post == null)
             {
@@ -79,6 +91,25 @@ namespace SimpleBlog.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(post);
+        }
+
+        // Currently not working
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> CreateComment([Bind("ID,Text")] Comment comment, Post post)
+        {
+            /*User currentUser = await _userManager.GetUserAsync(User);
+            Post currentPost = post;
+            comment.Creator = currentUser;
+            comment.CreatedTime = DateTime.Now;
+            comment.Post = currentPost;
+            if (ModelState.IsValid)
+            {
+                await _context.AddAsync(comment);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }*/
+            return View();
         }
 
         // GET: Posts/Edit/5

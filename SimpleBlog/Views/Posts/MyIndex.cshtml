@@ -1,7 +1,7 @@
-﻿@model IEnumerable<SimpleBlog.Models.Comment>
+﻿@model IEnumerable<SimpleBlog.Models.Post>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "MyIndex";
 }
 
 <h1>Index</h1>
@@ -13,16 +13,13 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Text)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.CreatedTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Creator)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Post)
             </th>
             <th></th>
         </tr>
@@ -31,16 +28,13 @@
 @foreach (var item in Model) {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Text)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CreatedTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Creator.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Post.Title)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
